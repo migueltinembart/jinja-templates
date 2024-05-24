@@ -3,7 +3,7 @@
     "$id": "https://raw.githubusercontent.com/migueltinembart/jinja-templates/main/raspi/schema.json",
     "type": "object",
     "properties": {
-        "user-data": {
+        "userdata": {
             "type": "object",
             "properties": {
                 "hostname": {
@@ -43,7 +43,7 @@
                 "timezone"
             ]
         },
-        "network-config": {
+        "networkconfig": {
             "type": "object",
             "properties": {
                 "ip_address": {
@@ -71,7 +71,7 @@
         }
     },
     "required": [
-        "user-data",
-        "network-config"
+        "userdata",
+        "networkconfig"
     ]
 }
