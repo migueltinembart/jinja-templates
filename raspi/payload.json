@@ -1,0 +1,38 @@
+{
+    "$schema": "https://raw.githubusercontent.com/migueltinembart/jinja-templates/main/raspi/schema.json",
+    "userdata": {
+        "hostname": "maas",
+        "username": "ansible",
+        "packages": [
+            "users",
+            "adm",
+            "dialout",
+            "audio",
+            "netdev",
+            "video",
+            "plugdev",
+            "cdrom",
+            "games",
+            "input",
+            "gpio",
+            "spi",
+            "i2c",
+            "render",
+            "sudo"
+        ],
+        "public_keys": [
+            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICt1... ansible"
+        ],
+        "passwordless_sudo": true,
+        "timezone": "Europe/Zurich"
+    },
+    "networkconfig": {
+        "ip_address": "192.168.10.2/24",
+        "gateway": "192.168.10.1",
+        "nameservers": [
+            "1.1.1.1",
+            "8.8.8.8"
+        ],
+        "search": "example.com"
+    }
+}
