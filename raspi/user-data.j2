@@ -1,0 +1,28 @@
+#cloud-config
+hostname: {{ userdata.hostname }}
+manage_etc_hosts: true
+package_update: true
+package_upgrade: true
+
+users:
+  - name: {{ userdata.username }}
+    groups: 
+      {%- for package in userdata.packages %}
+      - {{ package }}
+      {%- endfor %}
+    shell: /bin/bash
+    lock_passwd: false
+    passwd: {{ userdata.password }}
+    ssh_authorized_keys:
+      {%- for key in userdata.public_keys %}
+      - {{ key }}
+      {%- endfor %}
+    {% if userdata.passwordless_sudo %}
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    {% endif %}
+
+timezone: {{ userdata.timezone }}
+
+runcmd:
+  - localectl set-x11-keymap "ch" pc105
+  - setupcon -k --force || true
