@@ -1,0 +1,26 @@
+{
+    "hostname": "regiond",
+    "username": "ansible",
+    "packages": [
+        "users",
+        "adm",
+        "dialout",
+        "audio",
+        "netdev",
+        "video",
+        "plugdev",
+        "cdrom",
+        "games",
+        "input",
+        "gpio",
+        "spi",
+        "i2c",
+        "render",
+        "sudo"
+    ],
+    "public_keys": [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICt1+no5CZBYaS6rdaWtTNnuLYqIYLYRe+lygn6GuVbN miguel.tinembart@macbook-pro"
+    ],
+    "passwordless_sudo": true,
+    "timezone": "Europe/Zurich"
+}

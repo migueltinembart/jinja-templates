@@ -1,0 +1,10 @@
+#cloud-config
+users:
+  - name: migueltinembart
+    ssh-authorized-keys:
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICt1+no5CZBYaS6rdaWtTNnuLYqIYLYRe+lygn6GuVbN miguel.tinembart@macbook-pro
+    sudo: "ALL=(ALL) NOPASSWD:ALL"
+    groups: sudo
+    shell: /bin/bash
+    lock-passwd: false
+    chpasswd: "RandomPassword"

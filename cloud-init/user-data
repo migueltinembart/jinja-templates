@@ -1,0 +1,20 @@
+#cloud-config
+hostname: maas-regiond
+manage_etc_hosts: true
+package_update: true
+package_upgrade: true
+
+users:
+  - name: migueltinembart
+    groups: users,adm,dialout,audio,netdev,video,plugdev,cdrom,games,input,gpio,spi,i2c,render,sudo
+    shell: /bin/bash
+    lock_passwd: false
+    passwd: $5$C0ghDyL/am$HbLo8gutXuVEefu7V9hVIegLpHl4EzmPEPMhNaPfqD4
+    ssh_authorized_keys:
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICt1+no5CZBYaS6rdaWtTNnuLYqIYLYRe+lygn6GuVbN miguel.tinembart@macbook-pro
+    sudo: ALL=(ALL) NOPASSWD:ALL
+
+timezone: Europe/Zurich
+runcmd:
+  - localectl set-x11-keymap "ch" pc105
+  - setupcon -k --force || true
