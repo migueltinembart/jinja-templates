@@ -20,10 +20,17 @@ keyword="$1"
 # Check if the keyword is valid
 case $keyword in
     raspi)
-        echo "Create a new Password needed for user password as user-data file"
+        echo "> Create a new Password needed for user password as user-data file"
         mkdir -p ./output/raspi
-        jinja2 ./raspi/user-data.j2 ./raspi/payload.json -D password=$(openssl passwd -6) > ./output/raspi/user-data
-        jinja2 ./raspi/network-config.j2 ./raspi/payload.json > ./output/raspi/network-config
+
+        # Generate temporary files
+        cat ./raspi/payload.json | jq '.userdata'  > ./output/raspi/user-data.json
+        cat ./raspi/payload.json | jq '.networkconfig' > ./output/raspi/network-config.json
+
+        jinja2 ./raspi/user-data.j2 ./output/raspi/user-data.json -D password=$(openssl passwd -6) > ./output/raspi/user-data
+        jinja2 ./raspi/network-config.j2 ./output/raspi/network-config.json > ./output/raspi/network-config
+
+        rm ./output/raspi/user-data.json ./output/raspi/network-config.json
         ;;
     cloud-init)
         directory="cloud-init"
