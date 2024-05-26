@@ -5,14 +5,14 @@ network:
     eth0:
       dhcp4: no
       addresses: 
-        -  {{ networkconfig.ip_address }}
+        -  {{ ip_address }}
       routes:
         - to: default
-          via: {{ networkconfig.gateway }}
+          via: {{ gateway }}
       nameservers:
         addresses: 
-          {%- for nameserver in networkconfig.nameservers  %}
+          {%- for nameserver in nameservers  %}
           - {{ nameserver }}
           {%- endfor %}
         search: 
-          - {{ networkconfig.search }}
+          - {{ search }}

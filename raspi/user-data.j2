@@ -1,27 +1,34 @@
 #cloud-config
-hostname: {{ userdata.hostname }}
+hostname: {{ hostname }}
 manage_etc_hosts: true
 package_update: true
 package_upgrade: true
+packages:
+  - avahi-daemon
+apt:
+  conf: |
+    Acquire {
+      Check-Date "false";
+    };
 
 users:
-  - name: {{ userdata.username }}
+  - name: {{ username }}
     groups: 
-      {%- for package in userdata.packages %}
+      {%- for package in packages %}
       - {{ package }}
       {%- endfor %}
     shell: /bin/bash
+    {%- if passwordless_sudo %}
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    {%- endif %}
     lock_passwd: false
-    passwd: {{ userdata.password }}
+    passwd: {{ password }}
     ssh_authorized_keys:
-      {%- for key in userdata.public_keys %}
+      {%- for key in public_keys %}
       - {{ key }}
       {%- endfor %}
-    {% if userdata.passwordless_sudo %}
-    sudo: ALL=(ALL) NOPASSWD:ALL
-    {% endif %}
 
-timezone: {{ userdata.timezone }}
+timezone: {{ timezone }}
 
 runcmd:
   - localectl set-x11-keymap "ch" pc105
